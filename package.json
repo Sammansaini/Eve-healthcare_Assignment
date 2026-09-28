@@ -1,0 +1,21 @@
+{
+  "name": "eve-healthcare",
+  "version": "1.0.0",
+  "private": true,
+  "description": "EVE Healthcare API: accounts and catalogue access",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.3"
+  }
+}
