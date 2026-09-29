@@ -29,27 +29,27 @@ Create the development database and apply the SQL files in this order:
 
 ```bash
 createdb eve_healthcare
-psql "postgres://postgres:postgres@localhost:5432/eve_healthcare" -f sql/001_create_users_and_catalogue.sql
+psql "postgres://postgres:postgres@localhost:5432/eve_healthcare" -f sql/create_users_and_catalogue.sql
 psql "postgres://postgres:postgres@localhost:5432/eve_healthcare" -f sql/seed_catalogue.sql
-psql "postgres://postgres:postgres@localhost:5432/eve_healthcare" -f sql/002_create_bookings_and_payments.sql
-psql "postgres://postgres:postgres@localhost:5432/eve_healthcare" -f sql/003_add_user_roles_and_webhook_events.sql
+psql "postgres://postgres:postgres@localhost:5432/eve_healthcare" -f sql/create_bookings_and_payments.sql
+psql "postgres://postgres:postgres@localhost:5432/eve_healthcare" -f sql/add_user_roles_and_webhook_events.sql
 ```
 
 If the database already has users, centres, tests, bookings, and payments, run only the last file:
 
 ```bash
-psql "postgres://postgres:postgres@localhost:5432/eve_healthcare" -f sql/003_add_user_roles_and_webhook_events.sql
+psql "postgres://postgres:postgres@localhost:5432/eve_healthcare" -f sql/add_user_roles_and_webhook_events.sql
 ```
 
-`sql/001_create_users_and_catalogue.sql` creates `users`, `centres`, `tests`, and `centre_tests`. It does not delete data. Run it on an empty database. If those tables already exist, skip it.
+`sql/create_users_and_catalogue.sql` creates `users`, `centres`, `tests`, and `centre_tests`. It does not delete data. Run it on an empty database. If those tables already exist, skip it.
 
 `sql/seed_catalogue.sql` inserts three centres, four tests, and their prices. Run it once. Running it again stops with a duplicate-key error and leaves the existing prices in place.
 
-`sql/002_create_bookings_and_payments.sql` adds `bookings` and `payments`. It can be run again without deleting rows.
+`sql/create_bookings_and_payments.sql` adds `bookings` and `payments`. It can be run again without deleting rows.
 
-`sql/003_add_user_roles_and_webhook_events.sql` adds `users.role` when that column is missing, and creates `webhook_events`. It can be run again without deleting rows. Existing users become `USER`.
+`sql/add_user_roles_and_webhook_events.sql` adds `users.role` when that column is missing, and creates `webhook_events`. It can be run again without deleting rows. Existing users become `USER`.
 
-`sql/000_reset_development_database.sql` drops every application table. Use it only when you want a clean development or test database, then run the four files above again. The automated tests run this reset only after checking that the database name ends with `_test`.
+`sql/reset_development_database.sql` drops every application table. Use it only when you want a clean development or test database, then run the four files above again. The automated tests run this reset only after checking that the database name ends with `_test`.
 
 Start the server:
 
@@ -287,7 +287,7 @@ Put this in `.env`, or pass it for one run:
 TEST_DATABASE_URL=postgres://postgres:postgres@localhost:5432/eve_healthcare_test npm test
 ```
 
-The test file refuses to run unless the database name ends with `_test`, is not `eve_healthcare`, and is different from the database name in `DATABASE_URL`. It checks `current_database()` again before applying `sql/000_reset_development_database.sql` and the setup files.
+The test file refuses to run unless the database name ends with `_test`, is not `eve_healthcare`, and is different from the database name in `DATABASE_URL`. It checks `current_database()` again before applying `sql/reset_development_database.sql` and the setup files.
 
 `npm test` uses Node's built-in test runner. The tests cover signup and login, booking ownership, the catalogue price copied onto a booking, successful and failed payments, a repeated payment, webhook replay, conflicting webhook data, a missing or wrong webhook secret, and admin-only catalogue writes.
 

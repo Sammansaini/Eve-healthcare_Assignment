@@ -1,6 +1,7 @@
 -- Development and test reset. Running this deletes every application table and its rows.
 -- Use it only on a database you are willing to rebuild.
--- Afterward, run 001, seed_catalogue.sql, 002, and 003.
+-- Afterward, run create_users_and_catalogue.sql, seed_catalogue.sql,
+-- create_bookings_and_payments.sql, and add_user_roles_and_webhook_events.sql.
 
 DROP TABLE IF EXISTS webhook_events;
 DROP TABLE IF EXISTS payments;

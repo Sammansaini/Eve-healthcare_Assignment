@@ -63,11 +63,11 @@ async function applySchema() {
       throw new Error(`Connected to ${current.rows[0].name}, expected ${testDbName}`);
     }
     for (const filename of [
-      '000_reset_development_database.sql',
-      '001_create_users_and_catalogue.sql',
+      'reset_development_database.sql',
+      'create_users_and_catalogue.sql',
       'seed_catalogue.sql',
-      '002_create_bookings_and_payments.sql',
-      '003_add_user_roles_and_webhook_events.sql',
+      'create_bookings_and_payments.sql',
+      'add_user_roles_and_webhook_events.sql',
     ]) {
       const sql = fs.readFileSync(path.join(root, 'sql', filename), 'utf8');
       await client.query(sql);

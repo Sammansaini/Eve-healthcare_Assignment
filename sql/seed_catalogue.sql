@@ -1,7 +1,7 @@
 -- Sample centres, tests, and prices for local use.
 -- Explicit ids keep the README examples stable. setval moves the sequences past them
 -- so a later INSERT without an id does not collide with these rows.
--- Run this once after 001_create_users_and_catalogue.sql. Running it again fails
+-- Run this once after create_users_and_catalogue.sql. Running it again fails
 -- if these ids already exist, which leaves the current prices unchanged.
 
 INSERT INTO centres (id, name, location) VALUES
