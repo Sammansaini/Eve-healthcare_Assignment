@@ -13,4 +13,5 @@ module.exports = {
   databaseUrl: required('DATABASE_URL'),
   jwtSecret: required('JWT_SECRET'),
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || '7d',
+  webhookSecret: required('WEBHOOK_SECRET'),
 };

@@ -2,6 +2,8 @@ const express = require('express');
 const authRoutes = require('./routes/auth');
 const centreRoutes = require('./routes/centres');
 const testRoutes = require('./routes/tests');
+const bookingRoutes = require('./routes/bookings');
+const paymentRoutes = require('./routes/payments');
 const { errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
@@ -11,6 +13,8 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/centres', centreRoutes);
 app.use('/tests', testRoutes);
+app.use('/bookings', bookingRoutes);
+app.use('/payments', paymentRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
